@@ -13,11 +13,9 @@ module.exports = function (app) {
     // });
 
     //get workouts
-    app.get("/api/workouts", (req, res) => {
+    app.get("/api/workout", (req, res) => {
 
-        db.Workout.find({}).then(dbWorkout => {
-            // console.log("ALL WORKOUTS");
-            // console.log(dbWorkout);
+        db.Workouts.find({}).then(dbWorkout => {
             dbWorkout.forEach(workout => {
                 var total = 0;
                 workout.exercises.forEach(e => {
