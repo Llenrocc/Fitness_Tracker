@@ -2,18 +2,6 @@ const express = require ("express");
 const logger = require ("morgan");
 const mongoose = require ("mongoose");
 const path = require ("path");
-const dotenv = require("dotenv");
-dotenv.config();
-
-const MongoClient = require('mongodb').MongoClient;
-const uri = 'mongodb+srv://llenrocc-admin:' + process.env.DB_PASSWORD + '@cluster0.xlkj9.mongodb.net/workoutDb?retryWrites=true&w=majority';
-const client = new MongoClient(uri, { useNewUrlParser: true });
-client.connect(err => {
-    const collection = client.db("test").collection("devices");
-    // perform actions on the collection object 
-    client.close();
-});
-
 
 const PORT = process.env.PORT || 3000;
 
