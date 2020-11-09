@@ -13,12 +13,12 @@ module.exports = function (app) {
     // });
 
     //get workouts
-    app.get("/api/workout", (req, res) => {
+    app.get("/api/workouts", (req, res) => {
 
-        db.Workouts.find({}).then(dbWorkout => {
-            dbWorkout.forEach(workout => {
+        db.Workouts.find({}).then(dbWorkouts => {
+            dbWorkouts.forEach(workouts => {
                 var total = 0;
-                workout.exercises.forEach(e => {
+                workouts.exercises.forEach(e => {
                     total += e.duration;
                 });
                 workout.totalDuration = total;
@@ -34,14 +34,14 @@ module.exports = function (app) {
     // add exercise
     app.put("/api/workouts/:id", (req, res) => {
 
-        db.Workout.findOneAndUpdate(
+        db.Workouts.findOneAndUpdate(
             { _id: req.params.id },
             {
                 $inc: { totalDuration: req.body.duration },
                 $push: { exercises: req.body }
             },
-            { new: true }).then(dbWorkout => {
-                res.json(dbWorkout);
+            { new: true }).then(dbWorkouts => {
+                res.json(dbWorkouts);
             }).catch(err => {
                 res.json(err);
             });
